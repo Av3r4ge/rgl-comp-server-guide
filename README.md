@@ -4,6 +4,18 @@ I've made this guide in order to help out people trying to configure their TF2 s
 
 This guide does not go over how to self-host, it is under the assumption you are either renting a server or know how to host an SRCDs server
 
+#### Contents
+
+[Installing Sourcemod](https://github.com/Av3r4ge/rgl-comp-server-guide?tab=readme-ov-file#installing-sourcemod)
+
+[Installing Required Plugins](https://github.com/Av3r4ge/rgl-comp-server-guide?tab=readme-ov-file#installing-required-plugins)
+
+[Setting Up Your cfgs](https://github.com/Av3r4ge/rgl-comp-server-guide?tab=readme-ov-file#setting-up-your-cfgs)
+
+[Installing Optional Plugins](https://github.com/Av3r4ge/rgl-comp-server-guide?tab=readme-ov-file#optional-plugins)
+
+[Miscellaneous](https://github.com/Av3r4ge/rgl-comp-server-guide?tab=readme-ov-file#miscellaneous)
+
 ***
 
 ## Installing Sourcemod
@@ -56,7 +68,7 @@ After uploading all of these you should be good for all the required plugins you
 
 ## Setting up your .cfgs
 
-In this repository there is a basic [server.cfg]() file. Anything in the server.cfg is automatically loaded when the server is started up. We will use this to setup the server's basic config file.
+In this repository there is a basic [server.cfg](/configs/server.cfg) file. Anything in the server.cfg is automatically loaded when the server is started up. We will use this to setup the server's basic config file.
 
 In this file there are lines you should change before you start your server with it. The most critical ones are your server passwords and API keys
 
@@ -84,7 +96,7 @@ To change the STV Port, go to your `server.cfg` and uncomment the `tv_port` line
 
 #### FastDL (Optional)
 
-FastDL is a way for people to download content through an HTTP server automatically when connecting to a server. This is very useful if people don't have a map and are connecting to the first time.
+FastDL is a way for people to download content through an HTTP server automatically when connecting to a server. Source has a way to automatically share files to the client but it is extremely slow. This is very useful if people don't have a map and are connecting for the first time.
 
 The directory of the webserver should match to the servers `tf/` directory. (for example it should contain the directories `tf/maps` and `tf/materials` from that link 
 
@@ -105,3 +117,38 @@ sv_downloadurl "https://sappho.io/files/tf/"
 ```
 
 They also have a way to upload new maps to their server by going to https://sappho.io/files/tf/
+
+***
+
+## Optional Plugins
+
+## SoapDM
+
+Many servers have SoapDM in their pregrame before readying up. This is very easy to setup and all it requires is just installing the plugin. You can download the plugin [here](https://github.com/sapphonie/SOAP-TF2DM).
+After downloading, inside the zip file there will be an `addons` and a `cfg` folder. Drag these folders to your `tf/` directory of your server to install it.
+
+SoapDM should work after your next restart. It will automatically unload when MGE is active or the round starts if you're in tournament mode.
+
+## MGE
+
+MGE is also pretty straight forward to setup like SoapDM. You can download the plugin [here](https://github.com/sapphonie/MGEMod?tab=readme-ov-file).  Download the zip file and you should see an `addons` folder and a `maps` folder. Drag these folders to your `tf/` directory of your server to install it.
+
+MGE will automatically load when it loads to one of the mge maps included in the maps folder.
+
+---
+
+## Miscellaneous
+
+#### Allowing for SDR support
+
+SDR is Valve's own network relay that can be enabled on source servers. This can be useful for players with bad routing to your server. To enable Valve SDR you need to add `-enablefakeip` to your servers launch options. Most hosting providers do not allow you to change your launch options of your server.
+
+On your next reboot your server will request an IP. You can test to see if SDR is enabled by typing `status` in console. 
+
+``udp/ip  : ** Valve IP **  (local: 0.0.0.0:27015)  (public IP from Steam: ** Your Server's IP** )``
+
+If your main server IP is different, then it works. You can use this as your connect IP and it'll use valve's routing.
+
+#### MOTD
+
+This is the thing people see when you first join the server. To edit your motd, go to your `tf/cfgs/` and create a `motd.txt` file. In this file you can create HTML, plain text, or paste a link to it.
